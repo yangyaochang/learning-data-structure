@@ -46,15 +46,11 @@ class LinkedList {
     }
 
     traverseToIndex(index) {
-        let counter = 0
         let currentNode = this.head
-        for (let i = 0; i < this.length; i++) {
-            if (counter !== index) {
-                currentNode = currentNode.next
-                counter++
-            }
-            return currentNode
+        for (let i = 1; i < index + 1; i++) {
+            currentNode = currentNode.next
         }
+        return currentNode
     }
 
     insert(index, value) {
@@ -86,7 +82,9 @@ console.log(myLinkedList.append(16))
 console.log(myLinkedList.prepend(1))
 console.log(myLinkedList.insert(2, 99))
 console.log(myLinkedList.printList())
+console.log(myLinkedList.traverseToIndex(3))
 console.log(myLinkedList.insert(20, 88))
 console.log(myLinkedList.printList())
 console.log(myLinkedList.remove(2))
 console.log(myLinkedList.printList())
+console.log(myLinkedList.traverseToIndex(2))
