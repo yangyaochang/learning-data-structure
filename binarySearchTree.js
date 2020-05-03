@@ -41,6 +41,40 @@ class BinarySearchTree {
         }
     }
 
+    recursiveInsert(value) {
+        const newNode  = new Node(value)
+
+        let traverseAndInsert = (currentNode) => {
+            // Check left or right
+            if (newNode.value < currentNode.value) {
+                //Move to the left child or insert the new node
+                if (!currentNode.left) {
+                    currentNode.left = newNode
+                    return this
+                } else {
+                    traverseAndInsert(currentNode.left)
+                }
+            } else if (newNode.value > currentNode.value) {
+                 //Move to the right child or insert the new node
+                if (!currentNode.right) {
+                    currentNode.right = newNode
+                    return this
+                } else {
+                    traverseAndInsert(currentNode.right)
+                }
+            } else {
+                // It newNode.value = currentNode.value, don't insert the new node
+                return this
+            }
+        }
+
+        if (!this.root) {
+            this.root = newNode
+        } else {
+            traverseAndInsert(this.root)
+        }
+    }
+
     lookup(value) {
         if (!this.root) {
             return false
@@ -60,14 +94,23 @@ class BinarySearchTree {
     }
 }
 
-let bst = new BinarySearchTree();
-bst.insert(9)
-bst.insert(4)
-bst.insert(6)
-bst.insert(20)
-bst.insert(170)
-bst.insert(15)
-bst.insert(1)
-console.log(JSON.stringify(bst))
-console.log(bst.lookup(15))
-console.log(bst.lookup(7))
+let iterativeBST = new BinarySearchTree();
+iterativeBST.insert(9)
+iterativeBST.insert(4)
+iterativeBST.insert(6)
+iterativeBST.insert(20)
+iterativeBST.insert(170)
+iterativeBST.insert(15)
+iterativeBST.insert(1)
+console.log(JSON.stringify(iterativeBST))
+// console.log(bst.lookup(15))
+// console.log(bst.lookup(7))
+let recursiveBST = new BinarySearchTree();
+recursiveBST.recursiveInsert(9)
+recursiveBST.recursiveInsert(4)
+recursiveBST.recursiveInsert(6)
+recursiveBST.recursiveInsert(20)
+recursiveBST.recursiveInsert(170)
+recursiveBST.recursiveInsert(15)
+recursiveBST.recursiveInsert(1)
+console.log(JSON.stringify(recursiveBST))
