@@ -50,7 +50,6 @@ class BinarySearchTree {
                 //Move to the left child or insert the new node
                 if (!currentNode.left) {
                     currentNode.left = newNode
-                    return this
                 } else {
                     traverseAndInsert(currentNode.left)
                 }
@@ -58,7 +57,6 @@ class BinarySearchTree {
                  //Move to the right child or insert the new node
                 if (!currentNode.right) {
                     currentNode.right = newNode
-                    return this
                 } else {
                     traverseAndInsert(currentNode.right)
                 }
@@ -72,6 +70,33 @@ class BinarySearchTree {
             this.root = newNode
         } else {
             traverseAndInsert(this.root)
+        }
+    }
+
+    recursivePreorderTraversal() {
+        // Preorder: VLR
+        let lookup = []
+        let currentNode = this.root
+
+        let traverseAndLookup = (currentNode) => {
+            lookup.push(currentNode.value)
+            // Check if ther is a left child node
+            // If check (!currentNode.left) {return} then return, the function will stop execute
+            if (currentNode.left) {
+                traverseAndLookup(currentNode.left)
+            }
+            // Check if there is a right child node
+            if (currentNode.right) {
+                traverseAndLookup(currentNode.right)
+            }
+        }
+
+        // Check if the root node has value
+        if (currentNode.value) {
+            traverseAndLookup(currentNode)
+            return lookup
+        } else {
+            return lookup
         }
     }
 
@@ -114,3 +139,6 @@ recursiveBST.recursiveInsert(170)
 recursiveBST.recursiveInsert(15)
 recursiveBST.recursiveInsert(1)
 console.log(JSON.stringify(recursiveBST))
+
+
+console.log(recursiveBST.recursivePreorderTraversal())
