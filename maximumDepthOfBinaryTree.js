@@ -66,6 +66,50 @@ class BinarySearchTree{
             return 0
         }
     }
+
+    // For a single node of the tree, what will be the maximum depth x of the subtree rooted at itself?
+
+    depthOfSubtree(value) {
+        // Traverse to the root of the subtree
+        const traverse = (currentNode) => {
+            if (value > currentNode.value) {
+                if (currentNode.right) {
+                    return traverse(currentNode.right)
+                } else {
+                    return 'Doesn\'t contain this value'
+                }
+            }
+            if (value < currentNode.value) {
+                if (currentNode.left) {
+                    return traverse(currentNode.left)
+                } else {
+                    return 'Doesn\'t contain this value'
+                }
+            }
+            if (value === currentNode.value) {
+                return findDepth(currentNode)
+            }
+        
+        }
+
+        // Use bottom-up to get the depth (Postorder traversal)
+        function findDepth(root) {
+            let [leftDepth, rightDepth] = [0, 0]
+
+            if (root.left) {
+                leftDepth = findDepth(root.left)
+            }
+            if (root.right) {
+                rightDepth = findDepth(root.right)
+            }
+            if (!root.left && !root.right) {
+                return 1
+            }
+            return Math.max(leftDepth, rightDepth) + 1
+        }
+
+        return traverse(this.root)
+    }
 }
 
 let BST = new BinarySearchTree();
@@ -76,9 +120,13 @@ BST.insert(20)
 BST.insert(170)
 BST.insert(15)
 BST.insert(1)
+BST.insert(5)
+BST.insert(17)
 console.log(JSON.stringify(BST))
 // JSON.stringify() converts an array or an object into JSON fromat
 
 console.log(BST.maximumDepth())
+console.log(BST.depthOfSubtree(20))
+
 
 
