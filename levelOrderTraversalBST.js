@@ -97,16 +97,17 @@ class BinarySearchTree{
                 queue.enqueue(currentNode.right)
             }
             if (queue.size) {
-                traverse(queue.dequeue())
-            } 
+                return traverse(queue.dequeue())
+            } else {
+                return list
+            }
         }
 
         if (this.root) {
-            traverse(this.root)
+            return traverse(this.root)
         } else {
             return []
         }
-        return list
     }
 }
 
