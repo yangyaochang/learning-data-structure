@@ -16,7 +16,7 @@ class RecursiveBST{
     insert(value) {
         const newNode = new Node(value)
 
-        let traverseAndInsert = (currentNode) => {
+        const traverseAndInsert = (currentNode) => {
             if (value > currentNode.value) {
                 if (!currentNode.right) {
                     currentNode.right = newNode
